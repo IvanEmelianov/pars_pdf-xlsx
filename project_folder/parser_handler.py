@@ -8,14 +8,15 @@ class Parser(Params):
     def extract_value(text, keyword):
 
 
-        pattern = re.compile(rf'{re.escape(keyword)}\s*(.*?)(?:\n|$)', re.DOTALL)
-        match = pattern.search(text)
+        start_index = text.find(keyword)
 
-        if match:
-            lines = match.group(1).strip().split('\n')
-            if len(lines) >= 2:
-                first_two_lines = '\n'.join(lines[:2])
-                values = [first_two_lines]
+        if start_index != -1:
+            substring = text[start_index:]
+            lines = substring.split('\n')
+            if len(lines) >= 3:
+                values = [line.strip() for line in lines[:2]]
+
+                values[0] = values[0].replace(keyword, '').strip()
 
                 print(f"Результат парсинга:\n{values}\n")  # Отладочный вывод
 

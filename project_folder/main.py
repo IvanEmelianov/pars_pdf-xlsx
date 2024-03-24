@@ -15,4 +15,5 @@ if __name__ == "__main__":
         if values:
             combined_values = '\n'.join(values)
             print(f"Распарсенные данные из файла {pdf_file}:\n{combined_values}\n")
+
             Excel.save_to_excel(combined_values, Params.EXCEL_FILE)
